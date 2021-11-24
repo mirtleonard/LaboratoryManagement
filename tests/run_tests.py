@@ -1,5 +1,5 @@
-from tests.test_student import *
-from tests.test_problem import *
+from tests.domain.test_student import *
+from tests.domain.test_problem import *
 
 def run_tests():
     test_create_student()
