@@ -6,19 +6,24 @@ class Student_Repository:
         GRASP - Pure Fabrication -  Repository Pattern
     """
     def __init__(self):
-        self.__students = []
+        self.__students = {}
 
     def add_student(self, id, name, group):
         """
-            if student is valid, it will add it in respository
+            if student is valid, will add it in respository
         """
         student = Student(id, name, group)
         student_validator = Student_Validator()
         student_validator.validate_student(student)
-        for other in self.__students:
-            if other.get_id() == student.get_id():
-                raise Repository_Exception("Student ID already exists.")
-        self.__students.append(student)
+        if id in self.__students:
+            raise Repository_Exception("Student ID already exists.")
+        self.__students[id] = student
+
+    def delete_student(self, id):
+        pass
+
+    def getAll(self):
+        pass
 
     def size(self):
         """

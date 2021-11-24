@@ -6,3 +6,4 @@ def run_tests():
     test_create_student()
     test_create_problem()
     test_add_student()
+    test_delete_student()
