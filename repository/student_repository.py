@@ -20,10 +20,19 @@ class Student_Repository:
         self.__students[id] = student
 
     def delete_student(self, id):
-        pass
+        """
+            if id exists, will delete student with id from repository
+            id - int
+        """
+        if not id in self.__students:
+            raise Repository_Exception("Student with ID does't exit!")
+        del self.__students[id]
 
     def getAll(self):
-        pass
+        """
+            returns all students from repo
+        """
+        return self.__students.values()
 
     def size(self):
         """
