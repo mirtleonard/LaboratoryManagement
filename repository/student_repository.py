@@ -29,10 +29,28 @@ class Student_Repository:
         del self.__students[id]
 
     def find_student(self, id):
-        pass
+        """
+            if student with id exists, will be returned
+            id-int
+            return - Student object
+        """
+        if not id in self.__students:
+            raise Repository_Exception("Student not found!")
+        return self.__students[id]
 
     def update_student(self, id, name, group):
-        pass
+        """
+            if student exists, will be updated with values
+            id -int
+            name -string
+            group -int
+        """
+        if not id in self.__students:
+            raise Repository_Exception("Student with ID doesn't exits")
+        student = self.__students[id]
+        student.set_name(name)
+        student.set_group(group)
+        self.__students[id] = student
 
     def getAll(self):
         """
