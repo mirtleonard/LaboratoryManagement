@@ -28,6 +28,12 @@ class Student_Repository:
             raise Repository_Exception("Student with ID does't exit!")
         del self.__students[id]
 
+    def find_student(self, id):
+        pass
+
+    def update_student(self, id, name, group):
+        pass
+
     def getAll(self):
         """
             returns all students from repo

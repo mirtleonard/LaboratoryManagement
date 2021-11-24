@@ -7,3 +7,5 @@ def run_tests():
     test_create_problem()
     test_add_student()
     test_delete_student()
+    test_find_student()
+    test_update_student()

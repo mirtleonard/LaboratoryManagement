@@ -20,3 +20,26 @@ def test_delete_student():
     student_repository.add_student(1, 'Andrei', 214)
     student_repository.delete_student(1)
     assert(student_repository.size() == 0)
+
+def test_find_student():
+    """
+        test find student from repository
+    """
+    student_repository = Student_Repository()
+    student_repository.add_student(1, 'Andrei', 214)
+    student = student_repository.find_student(1)
+    assert student.get_id() == 1
+    assert student.get_name() == 'Andrei'
+    assert student.get_group() == 214
+
+def test_update_student():
+    """
+        test update student from repository
+    """
+    student_repository = Student_Repository()
+    student_repository.add_student(1, 'Andrei', 214)
+    student_repository.update_student(1, 'Ionescu', 200)
+    student = student_repository.find_student(1)
+    assert student.get_id() == 1
+    assert student.get_name() == 'Ionescu'
+    assert student.get_group() == 200
