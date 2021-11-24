@@ -21,3 +21,18 @@ class Problem:
 
     def set_description(self, new_description):
         self.__description = new_description
+
+class Problem_Validator:
+    def validate_student(self, problem):
+        """
+            Validates instance of a problem
+        """
+        errors = ""
+        if problem.get_id() < 0:
+            errors += "invalid id\n"
+        if problem.get_description() == "":
+            errors += "invalid name\n"
+        if problem.get_deadline() == "":
+            errors += "invalid deadline\n"
+        if len(errors) > 0:
+            raise ValidationError(errors)
