@@ -11,3 +11,6 @@ def run_tests():
     test_update_student()
     test_create_problem()
     test_add_problem()
+    test_delete_problem()
+    test_find_problem()
+    test_update_problem()

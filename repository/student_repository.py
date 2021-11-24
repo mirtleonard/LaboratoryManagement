@@ -35,7 +35,7 @@ class Student_Repository:
     def find_student(self, id):
         """
             if student with id exists, will be returned
-            id-int
+            id - int
             return - Student object
         """
         if not id in self.__students:
@@ -45,9 +45,9 @@ class Student_Repository:
     def update_student(self, id, name, group):
         """
             if student exists, will be updated with values
-            id -int
-            name -string
-            group -int
+            id - int
+            name - string
+            group - int
         """
         if not id in self.__students:
             raise Repository_Exception("Student with ID doesn't exits")

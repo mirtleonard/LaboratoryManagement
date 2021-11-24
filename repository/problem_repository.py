@@ -23,6 +23,39 @@ class Problem_Repository:
             raise Repository_Exception("Problem ID already exists.")
         self.__problems[id] = problem
 
+    def delete_problem(self, id):
+        """
+            if id exists, will delete problem with id from repository
+            id - int
+        """
+        if not id in self.__problems:
+            raise Repository_Exception("Problem with ID does't exit!")
+        del self.__problems[id]
+
+    def find_problem(self, id):
+        """
+            if problem with id exists, will be returned
+            id- int
+            return - Problem object
+        """
+        if not id in self.__problems:
+            raise Repository_Exception("Problem not found!")
+        return self.__problems[id]
+
+    def update_problem(self, id, description, deadline):
+        """
+            if problem exists, will be updated with values
+            id - int
+            description - string
+            deadline - string
+        """
+        if not id in self.__problems:
+            raise Repository_Exception("Problem with ID doesn't exits")
+        problem = self.__problems[id]
+        problem.set_description(description)
+        problem.set_deadline(deadline)
+        self.__problems[id] = problem
+
     def getAll(self):
         """
             returns all problems from repo
