@@ -1,4 +1,5 @@
 from domain.student import *
+from repository.repository_exception import *
 
 class Student_Repository:
     """
@@ -11,6 +12,9 @@ class Student_Repository:
     def add_student(self, id, name, group):
         """
             if student is valid, will add it in respository
+            id - int
+            name - string
+            group - int
         """
         student = Student(id, name, group)
         student_validator = Student_Validator()
@@ -63,14 +67,3 @@ class Student_Repository:
             return the number of students in the repository
         """
         return len(self.__students)
-
-class Repository_Exception(Exception):
-    """
-      Base class for the exceptions in the repository
-    """
-    def __init__(self, msg):
-        self.__msg = msg
-    def get_msg(self):
-        return self.__msg
-    def __str__(self):
-        return self.__msg

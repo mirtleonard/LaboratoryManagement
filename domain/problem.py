@@ -2,6 +2,9 @@ class Problem:
     def __init__(self, id, description, deadline):
         """
             Create a new problem with given id, description, deadline
+            id - int
+            description - string
+            deadline - string
         """
         self.__id = id
         self.__description = description
@@ -23,7 +26,7 @@ class Problem:
         self.__description = new_description
 
 class Problem_Validator:
-    def validate_student(self, problem):
+    def validate_problem(self, problem):
         """
             Validates instance of a problem
         """
