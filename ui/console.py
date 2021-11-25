@@ -33,7 +33,7 @@ class Console_UI:
                     elif options[pos + 1] == "problem":
                         id = read_input("Insert problem ID:\n>>> ", integer = True)
                         description = read_input("Insert problem description:\n>>> ", string = True)
-                        deadline = read_input("Insert problem deadline:\n>>> ", integer = True)
+                        deadline = read_input("Insert problem deadline:\n>>> ", string = True)
                         self.__problem_repository.add_problem(id, description, deadline)
                 elif options[pos] == "remove":
                     if (len(options) <= pos + 1):
@@ -71,7 +71,7 @@ class Console_UI:
                     elif options[pos + 1] == "problem":
                         id = read_input("Insert problem ID:\n>>> ", int = True)
                         description = read_input("Insert problem description:\n>>> ", string = True)
-                        deadline = read_input("Insert problem deadline:\n>>> ", integer = True)
+                        deadline = read_input("Insert problem deadline:\n>>> ", string = True)
                         self.__problem_repository.update_problem(id, description, deadline)
                     else:
                         invalid()
@@ -80,9 +80,9 @@ class Console_UI:
                         continue
                     skip += 1
                     if (options[pos + 1] == "students"):
-                        print(str(self.__student_repository.get_all()))
+                        print(self.__student_repository)
                     elif (options[pos + 1] == "problems"):
-                        print(str(self.__problem_repository.get_all()))
+                        print(self.__problem_repository)
                     else:
                         print("Invalid input!")
                 elif options[pos] == "help":

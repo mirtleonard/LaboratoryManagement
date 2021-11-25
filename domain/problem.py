@@ -25,6 +25,9 @@ class Problem:
     def set_description(self, new_description):
         self.__description = new_description
 
+    def __str__(self):
+        return "| ID | Description | Deadline |\n"  +  "_______________________________\n" + str(self.__id) + " " + self.__description + " " + str(self.__deadline)
+
 class Problem_Validator:
     def validate_problem(self, problem):
         """

@@ -22,10 +22,13 @@ class Student:
     def set_group(self, new_group):
         self.__group = new_group
 
+    def __str__(self):
+        return "| ID | Name | Group |\n"  +  "_____________________\n" + str(self.__id) + " " + self.__name + " " + str(self.__group)
+
 class Student_Validator:
     def validate_student(self, student):
         """
-            Validates instance of a student 
+            Validates instance of a student
         """
         errors = ""
         if student.get_id() < 0:
