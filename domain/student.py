@@ -23,7 +23,7 @@ class Student:
         self.__group = new_group
 
     def __str__(self):
-        return "| ID | Name | Group |\n"  +  "_____________________\n" + str(self.__id) + " " + self.__name + " " + str(self.__group)
+        return "| ID | Name | Group |\n"  +  "_____________________\n" + str(self.__id) + " | " + self.__name + " | " + str(self.__group)
 
 class Student_Validator:
     """

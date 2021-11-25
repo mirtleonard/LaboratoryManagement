@@ -74,5 +74,5 @@ class Student_Repository:
         """
         string =  "| ID | Name | Group |\n"  +  "_____________________\n"
         for student in self.__students.values():
-            string += str(student.get_id()) + " " + student.get_name() + " " + str(student.get_group()) + "\n"
+            string += str(student.get_id()) + " | " + student.get_name() + " | " + str(student.get_group()) + "\n"
         return string

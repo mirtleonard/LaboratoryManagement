@@ -16,10 +16,10 @@ class Mark_Repository:
             problem - object of Problem type
         """
         try:
-            student = student_repo.find(student_id)
-            problem = problem_repo.find(probmlem_id)
-        except:
-            raise Repository_Exception("Student or Problem doesn't exits!")
+            student = student_repo.find_student(student_id)
+            problem = problem_repo.find_problem(problem_id)
+        except Exception as error:
+            raise Repository_Exception(error)
         student_mark = Mark(student, problem, mark)
         mark_validator = Mark_Validator()
         mark_validator.validate_mark(student_mark)
@@ -31,5 +31,5 @@ class Mark_Repository:
         """
         answer = "| Student | Problem | Mark |\n____________________________\n"
         for student_mark in self.__marks.values():
-            answer += student_mark.get_student().get_name() + ' - ' + student_problem.get_problem().get_description() + ' - ' + str(student_mark.get_mark()) + "\n"
+            answer += student_mark.get_student().get_name() + ' | ' + student_mark.get_problem().get_description() + ' | ' + str(student_mark.get_mark()) + "\n"
         return answer

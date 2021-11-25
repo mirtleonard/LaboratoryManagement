@@ -8,12 +8,12 @@ class Mark:
 
     __count = 0
 
-    def __init__(problem, student, mark):
-        self.__id = __count
-        self.__problem = problem
+    def __init__(self, student, problem, mark):
+        self.__id = self.__count
         self.__student = student
+        self.__problem = problem
         self.__mark = mark
-        __count += 1
+        self.__count += 1
 
     def get_problem(self):
         return self.__problem
@@ -38,13 +38,13 @@ class Mark:
 
     def __str__(self):
         answer = "| Student | Problem | Mark |\n____________________________\n"
-        answer += str(self.__student) + ' - ' + str(self.__problem) + ' - ' + str(student_mark.__mark) + '\n'
+        answer += str(self.__student) + ' | ' + str(self.__problem) + ' | ' + str(student_mark.__mark) + '\n'
         return asnwer
 
 class Mark_Validator:
     """
         Class wich validates the assignment
     """
-    def validate_mark(student_mark):
+    def validate_mark(self, student_mark):
         if student_mark.get_mark() < 0 or student_mark.get_mark() > 10:
             raise ValidationError("Mark is invalid!")
