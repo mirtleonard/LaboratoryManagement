@@ -26,10 +26,10 @@ class Student:
         return "| ID | Name | Group |\n"  +  "_____________________\n" + str(self.__id) + " " + self.__name + " " + str(self.__group)
 
 class Student_Validator:
+    """
+        Validates instance of a student
+    """
     def validate_student(self, student):
-        """
-            Validates instance of a student
-        """
         errors = ""
         if student.get_id() < 0:
             errors += "invalid id\n"

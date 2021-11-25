@@ -67,3 +67,12 @@ class Problem_Repository:
             return the number of problems in the repository
         """
         return len(self.__problems)
+
+    def __str__(self):
+        """
+            returns all the students in repository
+        """
+        string =  "| ID | Description | Deadline |\n"  +  "_______________________________\n"
+        for problem in self.__problems.values():
+            string += str(problem.get_id()) + " " + problem.get_description() + " " + problem.get_deadline() + "\n"
+        return string
