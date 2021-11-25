@@ -56,7 +56,7 @@ class Problem_Repository:
         problem.set_deadline(deadline)
         self.__problems[id] = problem
 
-    def getAll(self):
+    def get_all(self):
         """
             returns all problems from repo
         """

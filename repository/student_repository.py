@@ -56,7 +56,7 @@ class Student_Repository:
         student.set_group(group)
         self.__students[id] = student
 
-    def getAll(self):
+    def get_all(self):
         """
             returns all students from repo
         """
