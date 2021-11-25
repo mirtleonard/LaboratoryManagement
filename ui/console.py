@@ -65,7 +65,7 @@ class Console_UI:
                         else:
                             invalid()
                     elif options[pos] == "update":
-                        if (len(options) <= pos + 1):
+                        if len(options) <= pos + 1:
                             continue
                         skip += 1
                         if options[pos + 1] == "student":
@@ -78,6 +78,21 @@ class Console_UI:
                             description = read_input("Insert problem description:\n>>> ", string = True)
                             deadline = read_input("Insert problem deadline:\n>>> ", string = True)
                             self.__problem_repository.update_problem(id, description, deadline)
+                        else:
+                            invalid()
+                    elif options[pos] == "random":
+                        if len(options) <= pos + 1:
+                            continue
+                        skip += 1
+                        if options[pos + 1] == "students":
+                            entities = read_input("Insert how many entities: \n>>> ", integer = True)
+                            self.__student_repository.random(entities)
+                        elif options[pos + 1] == "problems":
+                            entities = read_input("Insert how many entities: \n>>> ", integer = True)
+                            self.__problem_repository.random(entities)
+                        elif options[pos + 1] == "marks":
+                            entities = read_input("Insert how many entities: \n>>> ", integer = True)
+                            self.__mark_repository.random(entities, self.__student_repository, self.__problem_repository)
                         else:
                             invalid()
                     elif options[pos] == "show":

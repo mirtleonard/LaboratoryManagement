@@ -1,3 +1,5 @@
+import random
+import datetime
 from domain.problem import *
 from repository.repository_exception import *
 
@@ -8,6 +10,29 @@ class Problem_Repository:
     """
     def __init__(self):
         self.__problems = {}
+
+    def random(self, entities):
+        """
+            adds x students random
+        """
+        while (entities):
+            id = random.randint(0,1000)
+            description = ""
+            for i in range(20):
+                description += chr(ord('a') + random.randint(0, 26))
+            deadline = datetime.date(2021,1,1) + datetime.timedelta(days = random.randint(0,100000))
+            deadline = str(deadline)
+            problem = Problem(id, description, deadline)
+            try:
+                problem_validator = Problem_Validator()
+                problem_validator.validate_problem(problem)
+            except:
+                continue
+            if id in self.__problems:
+                continue;
+            entities -= 1
+            self.__problems[id] = problem
+
 
     def add_problem(self, id, description, deadline):
         """

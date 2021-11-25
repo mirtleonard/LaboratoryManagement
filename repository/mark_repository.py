@@ -1,3 +1,4 @@
+import random
 from controller.mark import *
 from repository.repository_exception import *
 
@@ -8,6 +9,23 @@ class Mark_Repository:
     """
     def __init__(self):
         self.__marks = {}
+
+    def random(self, entities, student_repo, problem_repo):
+        """
+            adds x number of marks random
+        """
+        if student_repo.size() == 0 or problem_repo.size() == 0:
+            raise Repository_Exception("There are no students or problems!")
+        while (entities):
+            try:
+                student = student_repo.find_student(random.randint(0, 1000))
+                problem = problem_repo.find_problem(random.randint(0, 1000))
+            except:
+                continue
+            mark = random.randint(1, 10)
+            student_mark = Mark(student, problem, mark)
+            entities -= 1
+            self.__marks[student_mark.get_id()] = student_mark
 
     def assign(self, student_id, problem_id, mark, student_repo, problem_repo):
         """

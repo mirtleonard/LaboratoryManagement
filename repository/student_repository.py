@@ -1,3 +1,4 @@
+import random
 from domain.student import *
 from repository.repository_exception import *
 
@@ -8,6 +9,27 @@ class Student_Repository:
     """
     def __init__(self):
         self.__students = {}
+
+    def random(self, entities):
+        """
+            adds x number of students random
+        """
+        while (entities):
+            id = random.randint(0,1000)
+            name = ""
+            for i in range(6):
+                name += chr(ord('a') + random.randint(0, 26))
+            group = random.randint(0,1000)
+            student = Student(id, name, group)
+            try:
+                student_validator = Student_Validator()
+                student_validator.validate_student(student)
+            except:
+                continue
+            if id in self.__students:
+                continue;
+            entities -= 1
+            self.__students[id] = student
 
     def add_student(self, id, name, group):
         """
