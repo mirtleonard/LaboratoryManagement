@@ -5,15 +5,15 @@ class Mark:
     """
         Class that represents student-problem
     """
-
-    __count = 0
+    id = 0
 
     def __init__(self, student, problem, mark):
-        self.__id = self.__count
+        self.__id = Mark.id
         self.__student = student
         self.__problem = problem
         self.__mark = mark
-        self.__count += 1
+        Mark.id += 1
+
 
     def get_problem(self):
         return self.__problem
@@ -37,14 +37,13 @@ class Mark:
         self.__mark = new_mark
 
     def __str__(self):
-        answer = "| Student | Problem | Mark |\n____________________________\n"
-        answer += str(self.__student) + ' | ' + str(self.__problem) + ' | ' + str(student_mark.__mark) + '\n'
-        return asnwer
+        answer = str(self.__student.get_name()) + ' | ' + str(self.__problem.get_description()) + ' | ' + str(self.__mark) 
+        return answer
 
 class Mark_Validator:
     """
         Class wich validates the assignment
     """
-    def validate_mark(self, student_mark):
-        if student_mark.get_mark() < 0 or student_mark.get_mark() > 10:
+    def validate(self, student_mark):
+        if student_mark.get_mark() <= 0 or student_mark.get_mark() > 10:
             raise ValidationError("Mark is invalid!")

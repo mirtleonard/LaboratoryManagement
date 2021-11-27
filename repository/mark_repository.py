@@ -1,5 +1,5 @@
 import random
-from controller.mark import *
+from domain.mark import *
 from repository.repository_exception import *
 
 class Mark_Repository:
@@ -10,44 +10,43 @@ class Mark_Repository:
     def __init__(self):
         self.__marks = {}
 
-    def random(self, entities, student_repo, problem_repo):
-        """
-            adds x number of marks random
-        """
-        if student_repo.size() == 0 or problem_repo.size() == 0:
-            raise Repository_Exception("There are no students or problems!")
-        while (entities):
-            try:
-                student = student_repo.find_student(random.randint(0, 1000))
-                problem = problem_repo.find_problem(random.randint(0, 1000))
-            except:
-                continue
-            mark = random.randint(1, 10)
-            student_mark = Mark(student, problem, mark)
-            entities -= 1
-            self.__marks[student_mark.get_id()] = student_mark
-
-    def assign(self, student_id, problem_id, mark, student_repo, problem_repo):
+    def add(self, student_mark):
         """
             if student_problems is valid, will add it to repository
             student - object of Student type
             problem - object of Problem type
         """
-        try:
-            student = student_repo.find(student_id)
-            problem = problem_repo.find_problem(problem_id)
-        except Exception as error:
-            raise Repository_Exception(error)
-        student_mark = Mark(student, problem, mark)
-        mark_validator = Mark_Validator()
-        mark_validator.validate_mark(student_mark)
+        if student_mark.get_id() in self.__marks:
+            raise Repository_Exception("Mark ID already exists.")
         self.__marks[student_mark.get_id()] = student_mark
 
-    def __str__(self):
+    def delete(self, id):
         """
-            Retrun the marks as strings
+            if id exists, will delete problem with id from repository
+            id - int
         """
-        answer = "| Student | Problem | Mark |\n____________________________\n"
-        for student_mark in self.__marks.values():
-            answer += student_mark.get_student().get_name() + ' | ' + student_mark.get_problem().get_description() + ' | ' + str(student_mark.get_mark()) + "\n"
-        return answer
+        if not id in self.__marks:
+            raise Repository_Exception("Mark with ID does't exit!")
+        del self.__marks[id]
+
+    def find(self, id):
+        """
+            if mark with id exists, will be returned
+            id - int
+            return - Mark object
+        """
+        if not id in self.__marks:
+            raise Repository_Exception("Mark not found!")
+        return self.__marks[id]
+
+    def get_all(self):
+        """
+            returns all marks from repo
+        """
+        return self.__marks
+
+    def size(self):
+        """
+            return the number of marks in the repository
+        """
+        return len(self.__marks)

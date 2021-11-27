@@ -7,10 +7,10 @@ class Console_UI:
         Class responsible with the user interface
         Will use the controller to perform operations other than read, print
     """
-    def __init__(self, student_controller, problem_controller, mark_repository):
+    def __init__(self, student_controller, problem_controller, mark_controller):
         self.__student_controller = student_controller
         self.__problem_controller = problem_controller
-        self.__mark_repository = mark_repository
+        self.__mark_controller = mark_controller
 
     def read_input(self):
         while True:
@@ -38,6 +38,11 @@ class Console_UI:
                             description = read_input("Insert problem description:\n>>> ", string = True)
                             deadline = read_input("Insert problem deadline:\n>>> ", string = True)
                             self.__problem_controller.add(id, description, deadline)
+                        elif options[pos + 1] == "mark":
+                            student_id = read_input("Insert student ID:\n>>> ", integer = True)
+                            problem_id = read_input("Insert problem ID:\n>>> ", integer = True)
+                            mark = read_input("Insert mark:\n>>> ", integer = True)
+                            self.__mark_controller.add(student_id, problem_id, mark, self.__student_controller.get_repository(), self.__problem_controller.get_repository())
                         else:
                             invalid()
                     elif options[pos] == "remove":
@@ -90,7 +95,7 @@ class Console_UI:
                             self.__problem_controller.random(entities)
                         elif options[pos + 1] == "marks":
                             entities = read_input("Insert how many entities: \n>>> ", integer = True)
-                            self.__mark_repository.random(entities, self.__student_controller.get_repository(), self.__problem_controller.get_repository())
+                            self.__mark_controller.random(entities, self.__student_controller.get_repository().get_all(), self.__problem_controller.get_repository().get_all())
                         else:
                             invalid()
                     elif options[pos] == "show":
@@ -108,14 +113,12 @@ class Console_UI:
                             for problem in problems:
                                 print(problem)
                         elif (options[pos + 1] == "marks"):
-                            print(self.__mark_repository)
+                            marks = self.__mark_controller.search_by_problem("")
+                            print("| Student | Problem | Mark |\n____________________________\n")
+                            for mark in marks:
+                                print(mark)
                         else:
                             print("Invalid input!")
-                    elif options[pos] == "assign":
-                        student_id = read_input("Insert student ID:\n>>> ", integer = True)
-                        problem_id = read_input("Insert problem ID:\n>>> ", integer = True)
-                        mark = read_input("Insert mark:\n>>> ", integer = True)
-                        self.__mark_repository.assign(student_id, problem_id, mark, self.__student_controller.get_repository(), self.__problem_controller.get_repository())
                     elif options[pos] == "help":
                         help()
                     else:
