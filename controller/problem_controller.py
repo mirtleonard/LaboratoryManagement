@@ -26,11 +26,7 @@ class Problem_Controller:
         """
             finds problem after id
         """
-        try:
-            problem = self.__repository.find(id)
-        except:
-            problem = -1
-        return problem
+        return self.__repository.find(id)
 
     def get_repository(self):
         """

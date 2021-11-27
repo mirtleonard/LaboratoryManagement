@@ -30,7 +30,11 @@ def test_controller_delete_student():
     controller = Student_Controller(repository, validator)
     controller.add(1, "Alin", 204)
     controller.delete(1)
-    assert(controller.find(1) == -1)
+    try:
+        controller.find(1)
+        assert(False)
+    except:
+        pass
 
 def test_controller_search_student():
     """

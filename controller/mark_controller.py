@@ -44,7 +44,7 @@ class Mark_Controller:
         """
         self.__repository.delete(id);
 
-    def search_by_problem(self, description):
+    def search_by_problem(self, problem):
         """
             if exist marks with problem description, will be returned
             description - string
@@ -53,20 +53,26 @@ class Mark_Controller:
         marks = self.__repository.get_all()
         result = []
         for mark in marks.values():
-            if description in mark.get_problem().get_description():
-                result.append(mark);
+            if type(problem) == type(0):
+                if problem == mark.get_problem().get_id():
+                    result.append(mark);
+            elif problem in mark.get_problem().get_description():
+                result.append(mark)
         return result
 
-    def search_by_student(self, name):
+    def search_by_student(self, student):
         """
-            if marks with student name exists, will be returned
+            if marks with student exists, will be returned
             name - string
             return - list of Marks objects
         """
         marks = self.__repository.get_all()
         result = []
         for mark in marks.values():
-            if name in mark.get_student().get_name():
+            if type(student) == type(0):
+                if student == mark.get_student().get_id():
+                    result.append(mark)
+            elif student in mark.get_student().get_name():
                 result.append(mark)
         return result
 

@@ -1,6 +1,7 @@
 import sys
 from ui.menu import *
 from ui.reading import *
+from controller.statistics import *
 
 class Console_UI:
     """
@@ -118,9 +119,31 @@ class Console_UI:
                             for mark in marks:
                                 print(mark)
                         else:
-                            print("Invalid input!")
+                            invalid()
+                    elif options[pos] == "statistics":
+                        statistics_menu()
+                        option = read_input("Enter the number of the option\n>>> ", integer = True)
+                        if option == 1:
+                            id = read_input("Insert the problem id \n>>> ", integer = True)
+                            problem = self.__problem_controller.find(id)
+                            marks = problem_top_students(self.__mark_controller, problem)
+                            print("| Student | Problem | Mark |\n____________________________\n")
+                            for mark in marks:
+                                print(mark)
+                        elif option == 2:
+                            students = students_who_failed(self.__mark_controller, self.__student_controller.search(""))
+                            print("| Student ID | Student Name | Student Group | Average |\n_______________________________________________________")
+                            for student in students:
+                                print(student[0], "|", student[1])
+                        elif option == 3:
+                            problems = top_50_problems(self.__mark_controller, self.__problem_controller.search(""))
+                            print("| Problem ID | Problem Description | Problem Deadline | Assigners |\n___________________________________________________________________\n")
+                            for problem in problems:
+                                print (problem[0], "|", problem[1])
+                        else:
+                            invalid()
                     elif options[pos] == "help":
-                        help()
+                        help_menu()
                     else:
                         invalid("Invalid option, type help if you are stuck!")
                 except:

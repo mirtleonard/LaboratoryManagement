@@ -25,11 +25,7 @@ class Student_Controller:
         """
             finds student after id
         """
-        try:
-            student = self.__repository.find(id)
-        except:
-            student = -1
-        return student
+        return self.__repository.find(id)
 
     def get_repository(self):
         """

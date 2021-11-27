@@ -30,7 +30,11 @@ def test_controller_delete_problem():
     controller = Problem_Controller(repository, validator)
     controller.add(1, "Sort", "20/02/2022")
     controller.delete(1)
-    assert(controller.find(1) == -1)
+    try:
+        controller.find(1);
+        assert(False)
+    except:
+        pass
 
 def test_controller_search_problem():
     """
