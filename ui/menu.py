@@ -11,4 +11,7 @@ def help():
     print("delete - 'student' delete a student from students list")
     print("       - 'problem' delete a problem from problems list\n")
     print("show   - 'students' print all students from students list")
-    print("       - 'problems' print all problems from problems list")
+    print("       - 'problems' print all problems from problems list\n")
+    print("random - 'students' adds random students")
+    print("       - 'problems' adds random sproblems\n")
+    print("assign - add mark to a student for a problem")

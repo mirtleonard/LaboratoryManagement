@@ -1,4 +1,10 @@
 class Student:
+    """
+        Represent a student
+        id - integer
+        name - string
+        group - integer
+    """
     def __init__(self, id, name, group):
         """
             Create a new student with the given id, name and group
@@ -21,6 +27,11 @@ class Student:
 
     def set_group(self, new_group):
         self.__group = new_group
+
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            return self.__id == other.get_id()
+        return False
 
     def __str__(self):
         return "| ID | Name | Group |\n"  +  "_____________________\n" + str(self.__id) + " | " + self.__name + " | " + str(self.__group)
