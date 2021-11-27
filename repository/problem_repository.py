@@ -1,5 +1,4 @@
 import random
-import datetime
 from domain.problem import *
 from repository.repository_exception import *
 
@@ -11,44 +10,18 @@ class Problem_Repository:
     def __init__(self):
         self.__problems = {}
 
-    def random(self, entities):
-        """
-            adds x students random
-        """
-        while (entities):
-            id = random.randint(0,1000)
-            description = ""
-            for i in range(20):
-                description += chr(ord('a') + random.randint(0, 26))
-            deadline = datetime.date(2021,1,1) + datetime.timedelta(days = random.randint(0,100000))
-            deadline = str(deadline)
-            problem = Problem(id, description, deadline)
-            try:
-                problem_validator = Problem_Validator()
-                problem_validator.validate_problem(problem)
-            except:
-                continue
-            if id in self.__problems:
-                continue;
-            entities -= 1
-            self.__problems[id] = problem
-
-
-    def add_problem(self, id, description, deadline):
+    def add(self, problem):
         """
             If problem is valid, will add it to repository
             id - int
             description - string
             deadline -string
         """
-        problem = Problem(id, description, deadline)
-        problem_validator = Problem_Validator()
-        problem_validator.validate_problem(problem)
-        if id in self.__problems:
+        if problem.get_id() in self.__problems:
             raise Repository_Exception("Problem ID already exists.")
-        self.__problems[id] = problem
+        self.__problems[problem.get_id()] = problem
 
-    def delete_problem(self, id):
+    def delete(self, id):
         """
             if id exists, will delete problem with id from repository
             id - int
@@ -57,7 +30,7 @@ class Problem_Repository:
             raise Repository_Exception("Problem with ID does't exit!")
         del self.__problems[id]
 
-    def find_problem(self, id):
+    def find(self, id):
         """
             if problem with id exists, will be returned
             id- int
@@ -67,7 +40,7 @@ class Problem_Repository:
             raise Repository_Exception("Problem not found!")
         return self.__problems[id]
 
-    def update_problem(self, id, description, deadline):
+    def update(self, id, new_problem):
         """
             if problem exists, will be updated with values
             id - int
@@ -76,28 +49,16 @@ class Problem_Repository:
         """
         if not id in self.__problems:
             raise Repository_Exception("Problem with ID doesn't exits")
-        problem = self.__problems[id]
-        problem.set_description(description)
-        problem.set_deadline(deadline)
-        self.__problems[id] = problem
+        self.__problems[id] = new_problem
 
     def get_all(self):
         """
             returns all problems from repo
         """
-        return self.__problems.values()
+        return self.__problems
 
     def size(self):
         """
             return the number of problems in the repository
         """
         return len(self.__problems)
-
-    def __str__(self):
-        """
-            returns all the students in repository
-        """
-        string =  "| ID | Description | Deadline |\n"  +  "_______________________________\n"
-        for problem in self.__problems.values():
-            string += str(problem.get_id()) + " | " + problem.get_description() + " | " + problem.get_deadline() + "\n"
-        return string

@@ -43,9 +43,7 @@ class Student_Repository:
             student - object of type Student
         """
         student = self.__students[id]
-        student.set_name(new_student.get_name())
-        student.set_group(new_student.get_group())
-        self.__students[id] = student
+        self.__students[id] = new_student
 
     def get_all(self):
         """

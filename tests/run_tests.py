@@ -3,6 +3,7 @@ from tests.domain.test_problem import *
 from tests.repository.test_student_repository import *
 from tests.repository.test_problem_repository import *
 from tests.controller.test_student_controller import *
+from tests.controller.test_problem_controller import *
 
 def run_tests():
     #student class
@@ -20,6 +21,12 @@ def run_tests():
     test_controller_update_student()
     #problem class
     test_create_problem()
+    #problem controller()
+    test_controller_add_problem()
+    test_controller_delete_problem()
+    test_controller_search_problem()
+    test_controller_random_problem()
+    test_controller_update_problem()
     #problem repository
     test_add_problem()
     test_delete_problem()

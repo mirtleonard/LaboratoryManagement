@@ -72,5 +72,5 @@ def test_controller_random_student():
     validator = Student_Validator()
     repository = Student_Repository()
     controller = Student_Controller(repository, validator)
-    controller.random(10);
+    controller.random(10)
     assert(len(controller.search("")) == 10)

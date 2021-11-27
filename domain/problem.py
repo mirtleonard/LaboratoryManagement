@@ -25,11 +25,16 @@ class Problem:
     def set_description(self, new_description):
         self.__description = new_description
 
+    def __eq__(self, other):
+        if isinstance(other, Problem):
+            return self.__id == other.get_id()
+        return False
+
     def __str__(self):
-        return "| ID | Description | Deadline |\n"  +  "_______________________________\n" + str(self.__id) + " | " + self.__description + " | " + str(self.__deadline)
+        return str(self.__id) + " | " + self.__description + " | " + str(self.__deadline)
 
 class Problem_Validator:
-    def validate_problem(self, problem):
+    def validate(self, problem):
         """
             Validates instance of a problem
         """
