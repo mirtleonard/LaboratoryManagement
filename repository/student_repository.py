@@ -58,12 +58,3 @@ class Student_Repository:
             return the number of students in the repository
         """
         return len(self.__students)
-
-    def __str__(self):
-        """
-            returns all the students in repository
-        """
-        string =  "| ID | Name | Group |\n"  +  "_____________________\n"
-        for student in self.__students.values():
-            string += str(student.get_id()) + " | " + student.get_name() + " | " + str(student.get_group()) + "\n"
-        return string

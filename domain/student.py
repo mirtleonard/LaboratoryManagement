@@ -34,13 +34,13 @@ class Student:
         return False
 
     def __str__(self):
-        return "| ID | Name | Group |\n"  +  "_____________________\n" + str(self.__id) + " | " + self.__name + " | " + str(self.__group)
+        return str(self.__id) + " | " + self.__name + " | " + str(self.__group)
 
 class Student_Validator:
     """
         Validates instance of a student
     """
-    def validate_student(self, student):
+    def validate(self, student):
         errors = ""
         if student.get_id() < 0:
             errors += "invalid id\n"

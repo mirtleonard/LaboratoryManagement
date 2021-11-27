@@ -7,8 +7,8 @@ class Console_UI:
         Class responsible with the user interface
         Will use the controller to perform operations other than read, print
     """
-    def __init__(self, student_repository, problem_repository, mark_repository):
-        self.__student_repository = student_repository
+    def __init__(self, student_controller, problem_repository, mark_repository):
+        self.__student_controller = student_controller
         self.__problem_repository = problem_repository
         self.__mark_repository = mark_repository
 
@@ -32,7 +32,7 @@ class Console_UI:
                             id = read_input("Insert student ID:\n>>> ", integer = True)
                             name = read_input("Insert student name:\n>>> ", string = True)
                             group = read_input("Insert student group:\n>>> ", integer = True)
-                            self.__student_repository.add_student(id, name, group)
+                            self.__student_controller.add(id, name, group)
                         elif options[pos + 1] == "problem":
                             id = read_input("Insert problem ID:\n>>> ", integer = True)
                             description = read_input("Insert problem description:\n>>> ", string = True)
@@ -44,11 +44,10 @@ class Console_UI:
                         if (len(options) <= pos + 1):
                             continue
                         skip += 1
+                        id = read_input("Insert the id(integer > 0)\n>>> ", integer=True)
                         if options[pos + 1] == "student":
-                            id = read_input("Insert the student id\n>>> ", integer=True)
-                            self.__student_repository.delete_student(id)
+                            self.__student_controller.delete(id)
                         elif options[pos + 1] == "problem":
-                            id = read_input("Insert the problem id\n>>> ", integer=True)
                             self.__problem_repository.delete_problem(id)
                         else:
                             invalid()
@@ -56,11 +55,10 @@ class Console_UI:
                         if (len(options) <= pos + 1):
                             continue
                         skip += 1
+                        id = read_input("Insert id(integer > 0)\n>>> ", integer=True)
                         if options[pos + 1] == "student":
-                            id = read_input("Insert the student id\n>>> ", integer=True)
-                            print(self.__student_repository.find_student(id))
+                            print(self.__student_controller.find(id))
                         elif options[pos + 1] == "problem":
-                            id = read_input("Insert the problem id\n>>> ", integer=True)
                             print(self.__problem_repository.find_problem(id))
                         else:
                             invalid()
@@ -72,7 +70,7 @@ class Console_UI:
                             id = read_input("Insert student ID:\n>>> ", integer = True)
                             name = read_input("Insert student new name:\n>>> ", string = True)
                             group = read_input("Insert student new group:\n>>> ", integer = True)
-                            self.__student_repository.update_student(int(id), name, int(group))
+                            self.__student_controller.update(int(id), name, int(group))
                         elif options[pos + 1] == "problem":
                             id = read_input("Insert problem ID:\n>>> ", int = True)
                             description = read_input("Insert problem description:\n>>> ", string = True)
@@ -86,7 +84,7 @@ class Console_UI:
                         skip += 1
                         if options[pos + 1] == "students":
                             entities = read_input("Insert how many entities: \n>>> ", integer = True)
-                            self.__student_repository.random(entities)
+                            self.__student_controller.random(entities)
                         elif options[pos + 1] == "problems":
                             entities = read_input("Insert how many entities: \n>>> ", integer = True)
                             self.__problem_repository.random(entities)
@@ -100,7 +98,10 @@ class Console_UI:
                             continue
                         skip += 1
                         if (options[pos + 1] == "students"):
-                            print(self.__student_repository)
+                            students = self.__student_controller.search("")
+                            print("| ID | Name | Group |\n"  +  "_____________________\n")
+                            for student in students:
+                                print(student)
                         elif (options[pos + 1] == "problems"):
                             print(self.__problem_repository)
                         elif (options[pos + 1] == "marks"):
@@ -111,7 +112,7 @@ class Console_UI:
                         student_id = read_input("Insert student ID:\n>>> ", integer = True)
                         problem_id = read_input("Insert problem ID:\n>>> ", integer = True)
                         mark = read_input("Insert mark:\n>>> ", integer = True)
-                        self.__mark_repository.assign(student_id, problem_id, mark, self.__student_repository, self.__problem_repository)
+                        self.__mark_repository.assign(student_id, problem_id, mark, self.__student_controller.get_repository(), self.__problem_repository)
                     elif options[pos] == "help":
                         help()
                     else:

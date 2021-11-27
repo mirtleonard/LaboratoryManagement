@@ -34,7 +34,7 @@ class Mark_Repository:
             problem - object of Problem type
         """
         try:
-            student = student_repo.find_student(student_id)
+            student = student_repo.find(student_id)
             problem = problem_repo.find_problem(problem_id)
         except Exception as error:
             raise Repository_Exception(error)

@@ -18,7 +18,7 @@ class Student_Controller:
             group - int
         """
         student = Student(id, name, group)
-        self.__validator.validate_student(student)
+        self.__validator.validate(student)
         self.__repository.add(student)
 
     def find(self, id):
@@ -30,6 +30,12 @@ class Student_Controller:
         except:
             student = -1
         return student
+
+    def get_repository(self):
+        """
+            return student, repository
+        """
+        return self.__repository
 
     def delete(self, id):
         """
@@ -59,7 +65,7 @@ class Student_Controller:
             group - int
         """
         new_student = Student(id, name, group)
-        self.__validator.validate_student(new_student)
+        self.__validator.validate(new_student)
         old_student = self.__repository.find(id)
         self.__repository.update(id, new_student)
 
