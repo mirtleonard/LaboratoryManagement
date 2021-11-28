@@ -13,6 +13,7 @@ def run_tests():
     test_delete_student()
     test_find_student()
     test_update_student()
+    Test_Student_File_Repository().run_tests()
     #student controller
     test_controller_add_student()
     test_controller_delete_student()

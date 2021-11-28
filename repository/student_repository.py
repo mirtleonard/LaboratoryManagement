@@ -56,3 +56,45 @@ class Student_Repository:
             return the number of students in the repository
         """
         return len(self.__students)
+
+class Student_File_Repository(Student_Repository):
+    def __init__(self, file):
+        Student_Repository.__init__(self)
+        self.__file = file
+        try:
+            file = open(self.__file, 'r')
+        except:
+            return
+        line = file.readline().strip()
+        while line != "":
+            attrs = line.split("|")
+            student = Student(int(attrs[0].strip()), attrs[1].strip(), int(attrs[2].strip()))
+            Student_Repository.add(self, student)
+            line = file.readline().strip()
+        file.close()
+
+
+    def __store(self):
+        file = open(self.__file, "w")
+        students = self.get_all()
+        for student in students.values():
+            file.write(str(student) + "\n")
+        file.close()
+
+    def delete_all(self, file):
+        students = list(self.get_all().keys())
+        for x in students:
+            self.delete(x)
+        open(file, 'w').close()
+
+    def add(self, student):
+        Student_Repository.add(self, student)
+        self.__store()
+
+    def update(self, id, new_student):
+        Student_Repository.update(self, id, new_student)
+        self.__store()
+
+    def delete(self, id):
+        Student_Repository.delete(self, id)
+        self.__store()

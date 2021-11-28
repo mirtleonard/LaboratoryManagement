@@ -13,6 +13,9 @@ from controller.mark_controller import *
 run_tests()
 #student
 student_validator = Student_Validator()
+#file
+student_repository = Student_File_Repository("hello.txt")
+#memory
 student_repository = Student_Repository()
 student_controller = Student_Controller(student_repository, student_validator)
 #problem

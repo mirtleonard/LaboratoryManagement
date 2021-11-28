@@ -1,3 +1,4 @@
+import unittest
 from domain.student import *
 from repository.student_repository import *
 
@@ -62,3 +63,40 @@ def test_update_student():
     assert student.get_id() == 1
     assert student.get_name() == 'Ionescu'
     assert student.get_group() == 200
+
+class Test_Student_File_Repository(unittest.TestCase):
+    def __setUp(self, file):
+        self.__file = file
+        self.__repository = Student_File_Repository(file)
+        self.__student = Student(1, 'Andrei', 214)
+        self.__repository.delete_all(file)
+
+    def __test_add(self):
+        self.__repository.add(self.__student)
+        assert self.__repository.find(1) == self.__student
+        test_repository = Student_File_Repository(self.__file)
+        assert test_repository.find(1) == self.__student
+        self.__repository.delete_all(self.__file)
+
+    def __test_remove(self):
+        self.__repository.add(self.__student)
+        self.__repository.delete(self.__student.get_id())
+        assert self.__repository.size() == 0
+        test_repository = Student_File_Repository(self.__file)
+        assert test_repository.size() == 0
+        self.__repository.delete_all(self.__file)
+
+    def __test_update(self):
+        self.__repository.add(self.__student)
+        new_student = Student(1, "Alin", 200)
+        self.__repository.update(1, new_student)
+        assert self.__repository.find(1) == new_student
+        test_repository = Student_File_Repository(self.__file)
+        assert test_repository.find(1) == new_student
+        self.__repository.delete_all(self.__file)
+
+    def run_tests(self):
+        self.__setUp("tests/test_student.txt")
+        self.__test_add()
+        self.__test_update()
+        self.__test_remove()
