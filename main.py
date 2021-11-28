@@ -11,21 +11,28 @@ from controller.problem_controller import *
 from controller.mark_controller import *
 
 run_tests()
-#student
+
+#students
 student_validator = Student_Validator()
 #file
-student_repository = Student_File_Repository("hello.txt")
+student_repository = Student_File_Repository("students.txt")
 #memory
-student_repository = Student_Repository()
+#student_repository = Student_Repository()
 student_controller = Student_Controller(student_repository, student_validator)
-#problem
+
+#problems
 problem_validator = Problem_Validator()
-problem_repository = Problem_Repository()
+#memory
+#problem_repository = Problem_Repository()
+#file
+problem_repository = Problem_File_Repository("problems.txt")
 problem_controller = Problem_Controller(problem_repository, problem_validator)
+
 #marks
 mark_validator = Mark_Validator()
 mark_repository = Mark_Repository()
 mark_controller = Mark_Controller(mark_repository, mark_validator)
+
 #ui
 ui = Console_UI(student_controller, problem_controller, mark_controller)
 ui.read_input()

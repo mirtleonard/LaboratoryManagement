@@ -1,3 +1,4 @@
+import unittest
 from domain.problem import *
 from repository.problem_repository import *
 
@@ -52,3 +53,41 @@ def test_update_problem():
     assert problem.get_id() == 1
     assert problem.get_description() == 'CMMMC'
     assert problem.get_deadline() == '24.11.2021'
+
+
+class Test_problem_File_Repository(unittest.TestCase):
+    def __setUp(self, file):
+        self.__file = file
+        self.__repository = Problem_File_Repository(file)
+        self.__problem = Problem(1, "CMMDC", "24.11.2021")
+        self.__repository.delete_all(file)
+
+    def __test_add(self):
+        self.__repository.add(self.__problem)
+        assert self.__repository.find(1) == self.__problem
+        test_repository = Problem_File_Repository(self.__file)
+        assert test_repository.find(1) == self.__problem
+        self.__repository.delete_all(self.__file)
+
+    def __test_remove(self):
+        self.__repository.add(self.__problem)
+        self.__repository.delete(self.__problem.get_id())
+        assert self.__repository.size() == 0
+        test_repository = Problem_File_Repository(self.__file)
+        assert test_repository.size() == 0
+        self.__repository.delete_all(self.__file)
+
+    def __test_update(self):
+        self.__repository.add(self.__problem)
+        new_problem = Problem(1, 'CMMMC', '25.11.2021')
+        self.__repository.update(1, new_problem)
+        assert self.__repository.find(1) == new_problem
+        test_repository = Problem_File_Repository(self.__file)
+        assert test_repository.find(1) == new_problem
+        self.__repository.delete_all(self.__file)
+
+    def run_tests(self):
+        self.__setUp("tests/test_problem.txt")
+        self.__test_add()
+        self.__test_update()
+        self.__test_remove()

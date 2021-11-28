@@ -62,3 +62,44 @@ class Problem_Repository:
             return the number of problems in the repository
         """
         return len(self.__problems)
+
+class Problem_File_Repository(Problem_Repository):
+    def __init__(self, file):
+        Problem_Repository.__init__(self)
+        self.__file = file
+        try:
+            file = open(self.__file, 'r')
+        except:
+            return
+        line = file.readline().strip()
+        while line != "":
+            attrs = line.split("|")
+            problem = Problem(int(attrs[0].strip()), attrs[1].strip(), attrs[2].strip())
+            Problem_Repository.add(self, problem)
+            line = file.readline().strip()
+        file.close()
+
+    def __store(self):
+        file = open(self.__file, "w")
+        problems = self.get_all()
+        for problem in problems.values():
+            file.write(str(problem) + "\n")
+        file.close()
+
+    def delete_all(self, file):
+        problems = list(self.get_all().keys())
+        for x in problems:
+            self.delete(x)
+        open(file, 'w').close()
+
+    def add(self, problem):
+        Problem_Repository.add(self, problem)
+        self.__store()
+
+    def update(self, id, new_problem):
+        Problem_Repository.update(self, id, new_problem)
+        self.__store()
+
+    def delete(self, id):
+        Problem_Repository.delete(self, id)
+        self.__store()

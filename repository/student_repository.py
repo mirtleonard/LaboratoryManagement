@@ -73,7 +73,6 @@ class Student_File_Repository(Student_Repository):
             line = file.readline().strip()
         file.close()
 
-
     def __store(self):
         file = open(self.__file, "w")
         students = self.get_all()

@@ -33,3 +33,4 @@ def run_tests():
     test_delete_problem()
     test_find_problem()
     test_update_problem()
+    Test_problem_File_Repository().run_tests()
