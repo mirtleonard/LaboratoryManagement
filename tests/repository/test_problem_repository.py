@@ -55,7 +55,7 @@ def test_update_problem():
     assert problem.get_deadline() == '24.11.2021'
 
 
-class Test_problem_File_Repository(unittest.TestCase):
+class Test_Problem_File_Repository(unittest.TestCase):
     def __setUp(self, file):
         self.__file = file
         self.__repository = Problem_File_Repository(file)

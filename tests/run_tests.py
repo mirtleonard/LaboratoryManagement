@@ -1,5 +1,6 @@
 from tests.domain.test_student import *
 from tests.domain.test_problem import *
+from tests.repository.test_mark_repository import *
 from tests.repository.test_student_repository import *
 from tests.repository.test_problem_repository import *
 from tests.controller.test_student_controller import *
@@ -20,9 +21,10 @@ def run_tests():
     test_controller_random_student()
     test_controller_search_student()
     test_controller_update_student()
+
     #problem class
     test_create_problem()
-    #problem controller()
+    #problem controller
     test_controller_add_problem()
     test_controller_delete_problem()
     test_controller_search_problem()
@@ -33,4 +35,7 @@ def run_tests():
     test_delete_problem()
     test_find_problem()
     test_update_problem()
-    Test_problem_File_Repository().run_tests()
+    Test_Problem_File_Repository().run_tests()
+
+    #mark class
+    Test_Mark_File_Repository().run_tests()

@@ -84,10 +84,16 @@ class Mark_Controller:
         problems = list(problems.values())
         if len(students) == 0 or len(problems) == 0:
             raise Exception("There are no students or problems!")
+        if len(students) * len(problems) - self.__repository.size() < entities:
+            print("There are too little students and problems to create different marks!")
+            entities = len(students) * len(problems) - self.__repository.size()
         while (entities):
             student = students[random.randint(0, len(students) - 1)]
             problem = problems[random.randint(0, len(problems) - 1)]
             mark = random.randint(1, 10)
             student_mark = Mark(student, problem, mark)
-            entities -= 1
-            self.__repository.add(student_mark)
+            try :
+                self.__repository.add(student_mark)
+                entities -= 1
+            except :
+                pass

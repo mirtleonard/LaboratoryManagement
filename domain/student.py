@@ -30,7 +30,7 @@ class Student:
 
     def __eq__(self, other):
         if isinstance(other, Student):
-            return self.__id == other.get_id()
+            return self.__id == other.get_id() and self.__name == other.get_name() and self.__group == other.get_group()
         return False
 
     def __str__(self):

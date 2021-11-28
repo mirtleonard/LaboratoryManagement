@@ -23,14 +23,16 @@ student_controller = Student_Controller(student_repository, student_validator)
 #problems
 problem_validator = Problem_Validator()
 #memory
-#problem_repository = Problem_Repository()
 #file
 problem_repository = Problem_File_Repository("problems.txt")
 problem_controller = Problem_Controller(problem_repository, problem_validator)
 
 #marks
 mark_validator = Mark_Validator()
-mark_repository = Mark_Repository()
+#memory
+#mark_repository = Mark_Repository()
+#file
+mark_repository = Mark_File_Repository("marks.txt", student_repository, problem_repository)
 mark_controller = Mark_Controller(mark_repository, mark_validator)
 
 #ui

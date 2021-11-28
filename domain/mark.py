@@ -5,15 +5,12 @@ class Mark:
     """
         Class that represents student-problem
     """
-    id = 0
 
     def __init__(self, student, problem, mark):
-        self.__id = Mark.id
+        self.__id = str(student.get_id()) + "-" + str(problem.get_id())
         self.__student = student
         self.__problem = problem
         self.__mark = mark
-        Mark.id += 1
-
 
     def get_problem(self):
         return self.__problem
@@ -36,9 +33,13 @@ class Mark:
     def set_mark(self, new_mark):
         self.__mark = new_mark
 
+    def __eq__(self, other):
+        if isinstance(other, Mark):
+            return other.get_id() == self.__id and other.get_problem() == self.__problem and other.get_mark() == self.__mark and other.get_student() == self.__student
+        return False
+
     def __str__(self):
-        answer = str(self.__student.get_name()) + ' | ' + str(self.__problem.get_description()) + ' | ' + str(self.__mark) 
-        return answer
+        return str(self.__student.get_id()) + ' | ' + str(self.__problem.get_id()) + ' | ' + str(self.__mark)
 
 class Mark_Validator:
     """

@@ -27,7 +27,7 @@ class Problem:
 
     def __eq__(self, other):
         if isinstance(other, Problem):
-            return self.__id == other.get_id()
+            return self.__id == other.get_id() and self.__deadline == other.get_deadline() and self.__description == other.get_description()
         return False
 
     def __str__(self):
